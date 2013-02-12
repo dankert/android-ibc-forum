@@ -202,7 +202,7 @@ public class TapatalkClient
 							(Date) topicMap.get("last_reply_time"), //
 							byteArrayToString(topicMap.get("short_content")),//
 							byteArrayToString(topicMap.get("topic_author_name")), 0);
-					topic.unread = (Boolean) topicMap.get("new_post");
+					topic.unread = toBool(topicMap.get("new_post"));
 					topics.add(topic);
 				}
 			}
@@ -471,7 +471,7 @@ public class TapatalkClient
 						(Date) topicMap.get("post_time"), //
 						byteArrayToString(topicMap.get("short_content")),//
 						byteArrayToString(topicMap.get("post_author_name")), 0);
-				topic.unread = (Boolean) topicMap.get("new_post");
+				topic.unread = toBool( topicMap.get("new_post") );
 				topics.add(topic);
 			}
 
@@ -729,6 +729,14 @@ public class TapatalkClient
 			return 0;
 		else
 			return i.intValue();
+	}
+
+	private static boolean toBool(Object object)
+	{
+		if (object == null)
+			return false;
+		else
+			return (Boolean) object;
 	}
 
 	/**
